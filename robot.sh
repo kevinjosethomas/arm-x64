@@ -40,8 +40,8 @@ case $OPERATION in
     
     async-server)
         python -m lerobot.async_inference.policy_server \
-            --host="${SERVER_HOST:-0.0.0.0}" \
-            --port="${SERVER_PORT:-8080}" \
+            --host=0.0.0.0 \
+            --port=8080 \
             "$@"
         ;;
     

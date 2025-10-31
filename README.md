@@ -51,13 +51,24 @@ Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `confi
     --dataset.reset_time=10
 ```
 
-### async inference (mac client -> pc server)
+### inference
+
+#### sync
 
 ```bash
-# start server on pc
-./robot.sh pc async-server
+./robot.sh pc inference \
+    --dataset.repo_id=kevinjosethomas/eval_smolvla_orange_plate \
+    --dataset.single_task="Pick up the orange and place it on the plate" \
+    --policy.path=kevinjosethomas/smolvla_orange_plate
+```
 
-# start client on mac (connecting to pc)
+#### async
+
+```bash
+# start server
+./robot.sh async-server
+
+# start client (mac -> pc)
 ./robot.sh mac async-client pc \
     --task="Pick up the orange and place it on the plate" \
     --policy_type=smolvla \
@@ -65,35 +76,27 @@ Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `confi
     --actions_per_chunk=50 \
     --chunk_size_threshold=0.5
 
-# or connecting to runpod gpu
-./robot.sh mac async-client 194.26.196.237:8080 \
+# or (mac -> runpod gpu)
+./robot.sh mac async-client runpod_ip_address:8080 \
     --task="Pick up the orange and place it on the plate" \
     --policy_type=smolvla \
     --pretrained_name_or_path=kevinjosethomas/smolvla_orange_plate \
     --actions_per_chunk=50 \
     --chunk_size_threshold=0.5
-```
 
-### async inference (pc client -> pc server)
-
-```bash
-# start server
-./robot.sh pc async-server
-
-# start client (connecting to local server)
-./robot.sh pc async-client pc \
+# or (pc -> pc)
+./robot.sh pc async-client 127.0.0.1:8080 \
     --task="Pick up the orange and place it on the plate" \
     --policy_type=smolvla \
     --pretrained_name_or_path=kevinjosethomas/smolvla_orange_plate \
     --actions_per_chunk=50 \
     --chunk_size_threshold=0.5
-```
 
-### inference/evaluation
-
-```bash
-./robot.sh pc inference \
-    --dataset.repo_id=kevinjosethomas/eval_smolvla_orange_plate \
-    --dataset.single_task="Pick up the orange and place it on the plate" \
-    --policy.path=kevinjosethomas/smolvla_orange_plate
+# or (pc -> runpod gpu)
+./robot.sh pc async-client runpod_ip_address:8080 \
+    --task="Pick up the orange and place it on the plate" \
+    --policy_type=smolvla \
+    --pretrained_name_or_path=kevinjosethomas/smolvla_orange_plate \
+    --actions_per_chunk=50 \
+    --chunk_size_threshold=0.5
 ```
