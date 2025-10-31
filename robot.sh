@@ -79,11 +79,25 @@ case $OPERATION in
         ;;
     
     calibrate)
-        lerobot-calibrate \
-            --robot.type="$ROBOT_TYPE" \
-            --robot.port="$ROBOT_PORT" \
-            --robot.id="$ROBOT_ID" \
-            "$@"
+        ARM_TYPE=$1
+        shift
+        if [ "$ARM_TYPE" = "leader" ]; then
+            lerobot-calibrate \
+                --robot.type="$TELEOP_TYPE" \
+                --robot.port="$TELEOP_PORT" \
+                --robot.id="$TELEOP_ID" \
+                "$@"
+        elif [ "$ARM_TYPE" = "follower" ]; then
+            lerobot-calibrate \
+                --robot.type="$ROBOT_TYPE" \
+                --robot.port="$ROBOT_PORT" \
+                --robot.id="$ROBOT_ID" \
+                "$@"
+        else
+            echo "Error: Please specify 'leader' or 'follower'"
+            echo "Usage: ./robot.sh <device> calibrate <leader|follower>"
+            exit 1
+        fi
         ;;
     
 esac

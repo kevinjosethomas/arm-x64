@@ -18,8 +18,8 @@ Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `confi
 ### calibration
 
 ```bash
-./robot.sh mac calibrate
-./robot.sh pc calibrate
+./robot.sh mac calibrate leader
+./robot.sh pc calibrate follower
 ```
 
 ### teleoperation
