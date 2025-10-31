@@ -38,10 +38,6 @@ case $OPERATION in
             "$@"
         ;;
     
-    check-cameras)
-        python lerobot/find_cameras.py opencv
-        ;;
-    
     async-server)
         python -m lerobot.async_inference.policy_server \
             --host="${SERVER_HOST:-0.0.0.0}" \

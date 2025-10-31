@@ -14,6 +14,16 @@ A monorepo for all scripts, configs, and policies for my Lerobot SO101 arms so i
 2. x64 (leader arm)
 3. iphone 14 camera
 
+## setup
+
+### runpod setup
+
+```bash
+./setup_runpod.sh
+```
+
+This will clone submodules, create a conda environment, and install dependencies.
+
 ## scripts
 
 Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `configs/runpod.conf` (robot ports, camera paths, etc).
@@ -39,13 +49,6 @@ Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `confi
     --dataset.num_episodes=50 \
     --dataset.single_task="Pick up the orange and place it on the plate" \
     --dataset.reset_time=10
-```
-
-### check cameras
-
-```bash
-./robot.sh mac check-cameras
-./robot.sh pc check-cameras
 ```
 
 ### async inference (mac client -> pc server)
