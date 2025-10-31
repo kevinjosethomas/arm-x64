@@ -83,9 +83,9 @@ case $OPERATION in
         shift
         if [ "$ARM_TYPE" = "leader" ]; then
             lerobot-calibrate \
-                --robot.type="$TELEOP_TYPE" \
-                --robot.port="$TELEOP_PORT" \
-                --robot.id="$TELEOP_ID" \
+                --teleop.type="$TELEOP_TYPE" \
+                --teleop.port="$TELEOP_PORT" \
+                --teleop.id="$TELEOP_ID" \
                 "$@"
         elif [ "$ARM_TYPE" = "follower" ]; then
             lerobot-calibrate \
