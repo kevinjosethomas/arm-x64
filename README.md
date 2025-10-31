@@ -2,27 +2,14 @@
 
 A monorepo for all scripts, configs, and policies for my Lerobot SO101 arms so it's easier to manage processes across my Macbook (inference), PC (training+inference), phone (camera), and Runpod GPUs (training+inference).
 
-## devices
-
-1. Macbook Air (M2, 15-inch)
-2. Desktop (RTX 2070 Super, Ubuntu 24.04)
-3. Runpod GPUs
-
-## components
-
-1. arm (follower arm)
-2. x64 (leader arm)
-3. iphone 14 camera
-
 ## setup
 
-### runpod setup
-
 ```bash
-./setup_runpod.sh
+./initialize.sh
 ```
 
-This will clone submodules, create a conda environment, and install dependencies.
+- On Mac, I use Continuity Camera to stream the iPhone camera, which serves as the top-down view.
+- On PC, I use DroidCam and OBS to stream the phone camera, which you can setup by following the instructions [here](https://huggingface.co/docs/lerobot/en/cameras?use+phone=Linux#use-your-phone).
 
 ## scripts
 
@@ -49,6 +36,19 @@ Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `confi
     --dataset.num_episodes=50 \
     --dataset.single_task="Pick up the orange and place it on the plate" \
     --dataset.reset_time=10
+```
+
+### training
+
+```bash
+lerobot-train \
+    --dataset.repo_id=kevinjosethomas/so101-orange-plate \
+    --policy.type=smolvla \
+    --output_dir=outputs/train/smolvla_orange_plate \
+    --job_name=smolvla_orange_plate \
+    --policy.device=cuda \
+    --wandb.enable=true \
+    --policy.repo_id=kevinjosethomas/smolvla_orange_plate
 ```
 
 ### inference
