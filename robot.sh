@@ -77,4 +77,13 @@ case $OPERATION in
             --teleop.id="$TELEOP_ID" \
             "$@"
         ;;
+    
+    calibrate)
+        lerobot-calibrate \
+            --robot.type="$ROBOT_TYPE" \
+            --robot.port="$ROBOT_PORT" \
+            --robot.id="$ROBOT_ID" \
+            "$@"
+        ;;
+    
 esac

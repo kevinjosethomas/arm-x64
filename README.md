@@ -15,6 +15,13 @@ A monorepo for all scripts, configs, and policies for my Lerobot SO101 arms so i
 
 Device-specific configs are in `configs/mac.conf`, `configs/pc.conf`, and `configs/runpod.conf` (robot ports, camera paths, etc).
 
+### calibration
+
+```bash
+./robot.sh mac calibrate
+./robot.sh pc calibrate
+```
+
 ### teleoperation
 
 ```bash
