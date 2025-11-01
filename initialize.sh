@@ -5,6 +5,7 @@ set -e
 echo "Cloning submodules..."
 git submodule update --init --recursive
 
+
 echo "Creating conda environment..."
 conda create -y -n lerobot python=3.10
 
